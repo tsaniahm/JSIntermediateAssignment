@@ -37,7 +37,7 @@
 // console.log(getAverage(arr1))
 // console.log(getAverage(arr2))
 
-//NO 3 HOW TO MAKE 2 DIMENSION INDEX BECOME SINGLE ARRAY INDEX
+//NO 3 DONE TAPI YG GA ADA BUKANNYA NULL MALAH UNDEFINED
 const arr = [
     [10],
     [9, 7, 1],
@@ -45,12 +45,15 @@ const arr = [
   ];
   
   function searchInArray(array, number) {
+    let newArr = []
+    for(let i = 0; i < array.length; i++)
+    {
+        newArr = newArr.concat(array[i]);
+    }
 
-    for(let i=0; i < array.length; i++ ){
-        for(let j=0; j < array.length; j++ ){
-            if(number == array[i][j]){
-                return i
-            }
+    for(let i=0; i<newArr.length; i++){
+        if(newArr[i] == number){
+            return i 
         }
     }
    }

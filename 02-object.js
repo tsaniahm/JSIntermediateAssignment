@@ -1,4 +1,4 @@
-//NO 1
+//NO 1 DONE
 // const person = {
 //     name: "person A",
 //     age: 100,
@@ -23,10 +23,10 @@
 //   console.log(person.favDrinks);
 //   console.log(person.greeting("John Watson"));
   
-  //NO 2 I DONT KNOW HOW TO PUT OBJ N PATH TOGETHER
+//NO 2 DONE tapi masih undefinded buka null
 // function getObjectValue(obj, path) { 
-//     console.log(path)
-//     return Object.values(obj)
+//   let newPath = path.split('.')
+//     return obj[newPath[0]][newPath[1]][newPath[2]]
 // }
 
 // const milkBasedCoffee = {
@@ -54,7 +54,7 @@
 // console.log(isMilkVegan)
 
 //NO 3
-// dibawah ini merupakan history transasksi yang telah kalian lakukan
+//dibawah ini merupakan history transasksi yang telah kalian lakukan
 const items = [
     {
       btc: { buy: 10, sell: 9 },
@@ -78,6 +78,19 @@ const items = [
   
   const calculateIncome = (items) => {
     /// EDIT DOWN HERE
+    let totalBtc = 0;
+    let totalEth = 0;
+    let totalDoge = 0;
+    
+
+    for(let i=0; i<items.length;i++){
+      totalBtc = totalBtc + (items[i].btc.sell - items[i].btc.buy)
+      totalEth = totalEth + (items[i].eth.sell - items[i].eth.buy)
+      totalDoge = totalDoge +  (items[i].doge.sell - items[i].doge.buy) 
+    }
+    const result = { btc : totalBtc, eth : totalEth, doge : totalDoge}
+    return result
+    
   }
   
   console.log(calculateIncome(items))
