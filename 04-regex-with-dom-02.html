@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Skilvul</title>
+</head>
+
+<body>
+    <form id="form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+        <button id="btn-submit" style="display: block; margin-top: 10px">
+            submit
+        </button>
+    </form>
+    <script>
+        /// EDIT DOWN HERE
+        const elBtnSubmit = document.querySelector("#btn-submit")
+        const elForm = document.querySelector("#form");
+
+        const elInputEmail = document.querySelector("#email");
+        const elInputPass = document.querySelector("#password");
+
+
+        const passwordValidator = new RegExp('^[0-9a-zA-Z!@#$%^&*]{6,}$');
+        const emailValidator = new RegExp('^[0-9a-zA-Z]+@+[a-z]+.+[com]$')
+        //const emailValidator = new RegExp('/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
+        console.log(emailValidator.test("me@gmail.com"))
+
+        elForm.onsubmit = function (e) {
+            event.preventDefault()
+            console.log("clicked")
+            if (emailValidator.test(elInputEmail.value)) {
+                if (passwordValidator.test(elInputPass.value)) {
+                    alert("Welcome to da jungle")
+                } else {
+                    alert("tolong masukan email yang valid")
+                }
+            } else {
+                alert("mohon masukkan password yg valid")
+            }
+        }
+    </script>
+</body>
+
+</html>
