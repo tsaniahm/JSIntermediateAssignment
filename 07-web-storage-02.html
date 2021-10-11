@@ -18,7 +18,8 @@
     <div class="container-fluid">
       <a class="navbar-brand">Skilvul</a>
       <form id="form-username" class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Username" aria-label="username" name="username" />
+        <input class="form-control me-2" type="text" placeholder="Username" aria-label="username" name="username"
+          required />
         <button class="btn btn-outline-primary" type="submit">login</button>
       </form>
       <div id="div-username" class="d-none d-flex">
@@ -66,7 +67,7 @@
         elUsername.innerHTML = username2
       } else {
         console.log("Sorry, your browser does not support web storage")
-       }
+      }
 
 
     })
@@ -90,7 +91,7 @@
       elCardTitle.innerHTML = user.login;
 
       const elCardButton = document.createElement("button");
-      elCardButton.classList.add("btn", "btn-primary", "w-100");
+      elCardButton.classList.add("btn", "btn-primary", "w-100", "follow");
       elCardButton.setAttribute("type", "button");
       elCardButton.innerHTML = "Follow";
 
@@ -101,7 +102,36 @@
       elCol.appendChild(elCard);
 
       elListUser.appendChild(elCol);
+
+
+      let followBtn = document.getElementsByClassName("follow")
+      let count = 0
+
+      for (let i = 0; i < followBtn.length; i++) {
+        if (followBtn[i].innerHTML = "Follow") {
+        followBtn[i].addEventListener("click", event => {
+            elBadgeUser.classList.remove("d-none")
+            count = count + 1
+            elBadgeUser.innerHTML = count
+            followBtn[i].innerHTML = "Unfollow"
+            followBtn[i].classList.remove("btn-primary")
+            followBtn[i].classList.add("btn-success")
+
+        })
+      } else if (followBtn[i].innerHTML = "Unfollow") {
+        followBtn[i].addEventListener("click", event => {
+            count = count - 1
+            elBadgeUser.innerHTML = count
+            followBtn[i].innerHTML = "Follow"
+            followBtn[i].classList.remove("btn-success")
+            followBtn[i].classList.add("btn-primary")
+          })
+          }
+      }
+
     });
+
+
 
   </script>
 
