@@ -41,114 +41,128 @@ dan Sonia, maka dapat digunakan method yang sama dengan isi format sapaan yg sam
 contoh "Halo ${nama]" => "Halo sania" untuk sania dan  "Halo Sonia" untuk Sonia*/
 
 //NO 3 DONE
-// class Phone { 
-//     constructor(brand, storage, ram){
-//         this.brand = brand;
-//         this.storage = storage;
-//         this.ram = ram;
-//     }
+class Phone { 
+    constructor(brand, storage, ram){
+        this.brand = brand;
+        this.storage = storage;
+        this.ram = ram;
+    }
 
-//     getBrandName(){
-//         return this.brand
-//     }
+    getBrandName(){
+        return this.brand
+    }
 
-//     setBrandName(lala){
-//         this.brand = lala
-//         return this.lala
-//     }
+    setBrandName(lala){
+        this.brand = lala
+        return this.lala
+    }
 
-//     printSpecification(){
-//         return `Ponsel ini memiliki storage: ${this.storage} dan ram: ${this.ram}`
-//     }
+    printSpecification(){
+        return `Ponsel ini memiliki storage: ${this.storage} dan ram: ${this.ram}`
+    }
 
-//     setSpecification(storage, ram){
-//         this.storage = storage
-//         this.ram = ram;
-//         return `Ponsel ini memiliki storage: ${this.storage} dan ram: ${this.ram}`
-//     }
-// }
+    setSpecification(storage, ram){
+        this.storage = storage
+        this.ram = ram;
+        return `Ponsel ini memiliki storage: ${this.storage} dan ram: ${this.ram}`
+    }
+}
 
-// const phone = new Phone("Skilvul Mobile co", 64, 4);
+const phone = new Phone("Skilvul Mobile co", 64, 4);
 
-// console.log(phone.getBrandName());
-// phone.setBrandName("SM.co")
-// console.log(phone.getBrandName());
+console.log(phone.getBrandName());
+phone.setBrandName("SM.co")
+console.log(phone.getBrandName());
 
-// console.log(phone.printSpecification());
-// phone.setSpecification(32, 2);
-// console.log(phone.printSpecification());
+console.log(phone.printSpecification());
+phone.setSpecification(32, 2);
+console.log(phone.printSpecification());
 
 //NO 4
 class Student {
-    constructor(name, gender) {
+  constructor(name, email) {
       this.name = name;
-      this.gender = gender;
+      this.email = email;
       this.courseOfferings = [];
-    }
-    
-    takeNewCourse(courses) { 
-      courses.decreaseQuota()
-      return this.courseOfferings.push(courses)
-    }
-    
-    takeATest() {}
-    
-    courseAttendance(course) {
-      for(let i = 0; i< this.courseOfferings.length; i++){
-        if(course == this.courseOfferings[i]){
-          return 1
-        }
-      }
-     }
   }
-  
-  class CourseOffering { 
-      constructor(course, grade,attendance ){
-          this.course = course
-          this.grade = grade
-          this.attendance  = attendance
-      }
-   }
-  
-  class Course { 
-      constructor(subject, quota, attendance){
-        this.subject = subject
-        this.quota = quota
-        this.attendance = attendance
-      }
-      
-      getSubject(){
-          return this.subject
-      }
 
-      getAttendance(){
-        return this.attendance
+  getCourseIndex(course) {
+      let index = -1;
+      for(let i = 0; i < this.courseOfferings.length; i++){
+          if (this.courseOfferings[i].course.getSubject() === course.getSubject()){
+              index = i;
+              break;
+          }
       }
+      return index;
+  }
 
-      decreaseQuota(){
-        return this.quota - 1
+  takeNewCourse(course) {
+      this.courseOfferings.push(new CourseOffering(course));
+      course.decreaseQuota();
+  }
+
+  takeATest(course){
+      const index = this.getCourseIndex(course);
+      if (this.courseOfferings[index].attendance >= course.getAttendance()) {
+          this.courseOfferings[index].grade = Math.floor(Math.random() * 100);
+      } else {
+          console.log("please fill your absent");
       }
-    }
-  
-  
-  const biology = new Course("biology", 10, 3);
-  const physics = new Course("physics", 10, 2);
-  
-  const johnWatson = new Student("john watson", "male");
-  
-  johnWatson.takeNewCourse(biology);
-  johnWatson.takeNewCourse(physics);
-  
-  johnWatson.courseAttendance(physics);
-  johnWatson.courseAttendance(physics);
-  johnWatson.courseAttendance(biology);
-  johnWatson.courseAttendance(physics);
-  
-  console.log(biology.quota);
-  console.log(physics.quota);
-  
-  johnWatson.takeATest(biology);
-  johnWatson.takeATest(physics);
-  
-  console.log(johnWatson.courseOfferings);
+  }
+
+  courseAttendance(course) {
+      const index = this.getCourseIndex(course);
+      this.courseOfferings[index].attendance++;
+  }
+}
+
+class CourseOffering {
+  constructor(course) {
+      this.course = course;
+      this.attendance = 0;
+      this.grade = 0;
+  }
+}
+
+class Course {
+  constructor(subject, quota, attendance) {
+      this.subject = subject;
+      this.quota = quota;
+      this.attendance = attendance;
+  }
+  getSubject() {
+      return this.subject;
+  }
+  getAttendance() {
+      return this.attendance;
+  }
+  decreaseQuota() {
+      this.quota--;
+  }
+}
+
+
+const biology = new Course("biology", 10, 3);
+const physics = new Course("physics", 10, 2);
+
+const johnWatson = new Student("john watson", "male");
+
+johnWatson.takeNewCourse(biology);
+johnWatson.takeNewCourse(physics);
+
+johnWatson.courseAttendance(physics);
+johnWatson.courseAttendance(physics);
+johnWatson.courseAttendance(biology);
+johnWatson.courseAttendance(physics);
+
+console.log(biology.quota);
+console.log(physics.quota);
+
+johnWatson.takeATest(biology);
+johnWatson.takeATest(physics);
+
+console.log(johnWatson.courseOfferings);
+
+ 
  
