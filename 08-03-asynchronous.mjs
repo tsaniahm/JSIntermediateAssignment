@@ -1,18 +1,19 @@
 import fetch from 'node-fetch';
 
-const getGitHubUser = async( str ) => { 
+const getGitHubUser = async( username ) => { 
     try {
-        if (!str) {
-            return null;
+        if (!username) {return null;}
+
+        const check = await fetch("https://api.github.com/users/"+username);
+        let result = await check.json();
+
+        if (result.id) {
+            return result;
         }
-        const check = await fetch("https://api.github.com/users/"+str);
-        let tmp = await check.json();
-        if (tmp.id) {
-            return tmp;
-        }
+
         return "Not Found";
-    } catch (error) {
-        throw (error);
+    } catch (e) {
+        throw (e);
     }
 }
 
