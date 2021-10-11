@@ -1,4 +1,4 @@
-//NO 3 DONE TAPI YG GA ADA BUKANNYA NULL MALAH UNDEFINED
+//NO 3 
 const arr = [
     [10],
     [9, 7, 1],
@@ -6,18 +6,13 @@ const arr = [
   ];
   
   function searchInArray(array, number) {
-    let newArr = []
-    for(let i = 0; i < array.length; i++)
-    {
-        newArr = newArr.concat(array[i]);
-    }
+    let newArray = [].concat(...array)
+    let search = newArray.indexOf(number)
 
-    for(let i=0; i<newArr.length; i++){
-        if(newArr[i] == number){
-            let result = i
-            if(result === undefined) return null
-            else return i 
-        }
+    if(search < 0){
+        return null
+    }else{
+        return search
     }
    }
   
